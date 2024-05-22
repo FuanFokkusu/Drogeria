@@ -7,7 +7,14 @@
  */
 package co.edu.uniquindio.poo;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
 
@@ -36,5 +43,48 @@ public class AppTest {
         Producto acetaminofen = new Medicamento("1", "Acetaminofen", "Pasta", 17000.00, 0, "Profamiliar", 12.00);
 
         drogeria.agregarProducto(acetaminofen);
+
+        assert acetaminofen.getStock() != 0: "NO HAY STOCK";
     }
-}
+
+    @Test
+
+    public void productosMayoresDe100(){
+
+        Drogeria drogeria = new Drogeria("Drogeria Saludable");
+
+
+        Producto acetaminofen = new Medicamento("1", "Acetaminofen", "Pasta", 17000.00, 100, "Profamiliar", 12.00);
+
+        Producto lozartan = new Medicamento("1", "lozartan", "Medicamento para la tos", 34000.00, 100, "Profamiliar", 450.00);
+
+        drogeria.agregarProducto(acetaminofen);
+
+        drogeria.agregarProducto(lozartan);    
+
+        Collection<Producto> listaEsperada = List.of(acetaminofen, lozartan);
+
+        assertIterableEquals(listaEsperada, drogeria.getProductoStock100());
+
+        LOG.info("Fin test obtener productos con stock mayor a 100");
+    }
+
+    @Test
+
+    public void costoTotalPedido(){
+
+        Drogeria drogeria = new Drogeria("asdjkasd");
+
+        Producto lozartan = new Medicamento("1", "lozartan", "Medicamento para la tos", 34000.00, 100, "Profamiliar", 450.00);
+
+        Pedido pedido = new Pedido(LocalDate.of(2024, 06, 12), 3, lozartan);
+
+        drogeria.agregarPedido(pedido);
+
+        assertEquals(102000.00, pedido.calcularValorPedido());
+
+    }
+
+
+    }
+        

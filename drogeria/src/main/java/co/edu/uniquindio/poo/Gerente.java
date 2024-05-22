@@ -7,14 +7,14 @@ public class Gerente extends Empleado{
         
     }
 
-    public void agregarProducto(Drogeria drogeria, Producto producto){
+    public void agregarProducto( Producto producto){
 
-        drogeria.agregarProducto(producto);
+        agregarProducto(producto);
     }
 
-    public void eliminarProducto(Drogeria drogeria, Producto producto){
+    public void eliminarProducto( Producto producto){
 
-        drogeria.eliminarProducto(producto);
+        eliminarProducto(producto);
     }
 
 }

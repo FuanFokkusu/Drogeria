@@ -1,7 +1,9 @@
 package co.edu.uniquindio.poo;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Drogeria {
 
@@ -34,67 +36,44 @@ public class Drogeria {
         this.nombre = nombre;
     }
 
-
-
     public Collection<Producto> getListaProductos() {
-        return listaProductos;
+        return Collections.unmodifiableCollection(listaProductos);
     }
-
-
-
-    public void setListaProductos(Collection<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
-
 
 
     public Collection<Cliente> getListaClientes() {
-        return listaClientes;
+         return Collections.unmodifiableCollection(listaClientes);
     }
-
-
-
-    public void setListaClientes(Collection<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
-
-
 
     public Collection<Empleado> getListaEmpleados() {
-        return listaEmpleados;
+        return Collections.unmodifiableCollection(listaEmpleados);
     }
-
-
-
-    public void setListaEmpleados(Collection<Empleado> listaEmpleados) {
-        this.listaEmpleados = listaEmpleados;
-    }
-
 
 
     public Collection<Pedido> getListaPedidos() {
-        return listaPedidos;
+        return Collections.unmodifiableCollection(listaPedidos);
     }
 
-
-
-    public void setListaPedidos(Collection<Pedido> listaPedidos) {
-        this.listaPedidos = listaPedidos;
-    }
-
-    public void agregarProducto(Producto producto){
-
-        if (producto.getStock() == 0) {
-
-            System.out.println("EL PRODUCTO NO SE ENCUENTRA EN STOCK");
-            
-        }
-
+    public void agregarProducto (Producto producto){
+        assert listaProductos != null;
         listaProductos.add(producto);
+    }
+
+    public void agregarPedido (Pedido pedido){
+        assert listaPedidos != null;
+        listaPedidos.add(pedido);
     }
 
     public void eliminarProducto(Producto producto){
 
         listaProductos.remove(producto);
     }
-}
+
+    public Collection <Producto> getProductoStock100 (){
+        return listaProductos.stream().filter(producto -> producto.getStock() >= 100).toList();
+    }
+
+
+
+    }
+
